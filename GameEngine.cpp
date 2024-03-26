@@ -49,24 +49,25 @@ void GameEngine::playRoundOfThree() {
     int humanWins = 0, computerWins = 0;
 
     for (int chance = 0; chance < 3; ++chance) {
+        // Assume humanPlayerMakesChoice(char choice) is called before this method
         char result = playRound();
 
         switch (result) {
         case 'H': humanWins++; break;
         case 'C': computerWins++; break;
-        case 'T': tieScore++; break;  // Assuming you want to track ties per chance
+        case 'T': tieScore++; break;
         }
     }
 
-    // Now update the total scores based on the results of the 3 chances
     if (humanWins > computerWins) {
-        scoreHuman++;  // Human wins the round
+        scoreHuman++;
     } else if (computerWins > humanWins) {
-        scoreComputer++;  // Computer wins the round
+        scoreComputer++;
     } else {
-        tieScore++;  // The round itself is a tie
+        tieScore++;
     }
 }
+
 
 
 char GameEngine::playRound() {

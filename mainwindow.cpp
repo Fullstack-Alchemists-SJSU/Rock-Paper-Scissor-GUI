@@ -14,16 +14,21 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , humanPlayer(new HumanPlayer())
-    , computerPlayer(new ComputerPlayer(new RandomStrategy())) // for example
+    , computerPlayer(new ComputerPlayer(new RandomStrategy()))
 {
     ui->setupUi(this);
-    // Connect buttons to slots
+
+    // Connect buttons to slots for individual choices
     connect(ui->pushButtonRock, &QPushButton::clicked, this, &MainWindow::on_pushButtonRock_clicked);
     connect(ui->pushButtonPaper, &QPushButton::clicked, this, &MainWindow::on_pushButtonPaper_clicked);
     connect(ui->pushButtonScissors, &QPushButton::clicked, this, &MainWindow::on_pushButtonScissors_clicked);
 
+    // Connect the button for playing a round of three to the corresponding slot
+    connect(ui->pushButtonPlayRound, &QPushButton::clicked, this, &MainWindow::playRoundOfThree);
+
     gameEngine = new GameEngine(humanPlayer, computerPlayer->getStrategy());
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -66,6 +71,14 @@ void MainWindow::updateRound()
     updateStats();  // This call updates the UI with the latest scores
 }
 
+void MainWindow::playRoundOfThree() {
+    // This method should initiate playing three rounds and then update the UI
+    // Assuming GameEngine has a method to play three rounds and update scores
+    gameEngine->playRoundOfThree();
+
+    // After playing three rounds, update the UI with the new scores
+    updateStats();
+}
 
 void MainWindow::updateUI(const QString &humanChoice, const QString &computerChoice, const QString &winner)
 {
@@ -80,6 +93,7 @@ void MainWindow::updateStats()
     ui->labelComputerWinsResult->setText(QString::number(gameEngine->getComputerScore()));
     ui->labelTiesResult->setText(QString::number(gameEngine->getTieScore()));
 }
+
 
 void MainWindow::resetGame()
 {

@@ -22,9 +22,10 @@ private slots:
     void on_pushButtonRock_clicked();
     void on_pushButtonPaper_clicked();
     void on_pushButtonScissors_clicked();
+    void playRoundOfThree();  // Add this line
     void updateUI(const QString &humanChoice, const QString &computerChoice, const QString &winner);
-    void updateRound();  // Declare the updateRound method here
-    void updateStats();  // Ensure this is also declared
+    void updateRound();
+    void updateStats();
     void resetGame();
 
 private:

@@ -124,6 +124,13 @@
         </layout>
         </widget>
         </item>
+        <item>
+             <widget class="QPushButton" name="pushButtonPlayRound">
+              <property name="text">
+               <string>Play Round</string>
+              </property>
+             </widget>
+            </item>
         </layout>
         </widget>
         <widget class="QMenuBar" name="menubar">
