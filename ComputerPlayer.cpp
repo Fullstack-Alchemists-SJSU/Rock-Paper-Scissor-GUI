@@ -26,3 +26,5 @@ void ComputerPlayer::setStrategy(Strategy* newStrategy) {
 Strategy* ComputerPlayer::getStrategy() const {
     return strategy;
 }
+
+

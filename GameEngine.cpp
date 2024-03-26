@@ -21,6 +21,7 @@ GameEngine::~GameEngine() {
     delete computerPlayer; // ComputerPlayer's destructor should delete its own strategy
 }
 
+
 int GameEngine::getHumanScore() const {
     return scoreHuman;
 }

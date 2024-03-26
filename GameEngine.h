@@ -39,6 +39,8 @@ public:
     char getResult() const;
 
     void playRoundOfThree();
+
+
 };
 
 #endif // GAMEENGINE_H
