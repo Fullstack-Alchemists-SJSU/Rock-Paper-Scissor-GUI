@@ -1,21 +1,20 @@
 #ifndef COMPUTERPLAYER_H
 #define COMPUTERPLAYER_H
 
-#include "Strategy.h"
 #include "Player.h"
-#include "SmartStrategy.h"  // Include the header of the default strategy
+#include "Strategy.h"
 
 class ComputerPlayer : public Player {
 private:
     Strategy* strategy;
-
+   char lastChoice;  // Add a member to store the last choice
 public:
-    // Update constructor to set a default strategy if none is provided
-    explicit ComputerPlayer(Strategy* strategy = new SmartStrategy());
-    ~ComputerPlayer();  // Don't forget the destructor to delete the strategy if it owns it
-
+    explicit ComputerPlayer(Strategy* strategy);
+    virtual ~ComputerPlayer();
     char makeChoice() override;
-    Strategy* getStrategy() const;  // Getter for the strategy
+    void setStrategy(Strategy* newStrategy); // Method to change the strategy
+    Strategy* getStrategy() const;
+    char getLastChoice() const;  // Add this method
 };
 
 #endif // COMPUTERPLAYER_H

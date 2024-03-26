@@ -15,6 +15,21 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayoutMain">
+   <item>
+    <widget class="QComboBox" name="strategyComboBox">
+     <item>
+      <property name="text">
+       <string>Smart Strategy</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Random Strategy</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+
     <item>
      <widget class="QLabel" name="labelRound">
       <property name="text">
@@ -124,13 +139,6 @@
         </layout>
         </widget>
         </item>
-        <item>
-             <widget class="QPushButton" name="pushButtonPlayRound">
-              <property name="text">
-               <string>Play Round</string>
-              </property>
-             </widget>
-            </item>
         </layout>
         </widget>
         <widget class="QMenuBar" name="menubar">

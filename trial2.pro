@@ -10,7 +10,9 @@ SOURCES += \
         GameEngine.cpp \
         HumanPlayer.cpp \
         ComputerPlayer.cpp \
-        RandomStrategy.cpp
+        RandomStrategy.cpp \
+        SmartStrategy.cpp \
+        FileManager.cpp
         # Add other source files here
 
 HEADERS += \
@@ -18,7 +20,9 @@ HEADERS += \
         GameEngine.h \
         HumanPlayer.h \
         ComputerPlayer.h \
-        RandomStrategy.h
+        RandomStrategy.h \
+        SmartStrategy.h \
+        FileManager.h
         # Add other header files here
 
 FORMS += \
