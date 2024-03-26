@@ -1,5 +1,9 @@
 #include "ComputerPlayer.h"
 
+char ComputerPlayer::getPrediction() const {
+    return strategy->predictNextMove();
+}
+
 ComputerPlayer::ComputerPlayer(Strategy* strategy)
     : strategy(strategy) {}
 

@@ -16,6 +16,11 @@ void GameEngine::setStrategy(Strategy* newStrategy) {
         computerPlayer->setStrategy(newStrategy);
     }
 }
+
+char GameEngine::getComputerPrediction() const {
+    return computerPlayer->getPrediction();
+}
+
 GameEngine::~GameEngine() {
     delete humanPlayer;
     delete computerPlayer; // ComputerPlayer's destructor should delete its own strategy

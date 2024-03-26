@@ -15,6 +15,8 @@ public:
     void setStrategy(Strategy* newStrategy); // Method to change the strategy
     Strategy* getStrategy() const;
     char getLastChoice() const;  // Add this method
+    char getPrediction() const;
+
 
 };
 

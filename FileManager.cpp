@@ -1,44 +1,50 @@
-// src/FileManager.cpp
+// FileManager.cpp
 #include "FileManager.h"
 #include <fstream>
 #include <sstream>
+#include <iostream> // For error logging
 
 bool FileManager::saveFrequencies(const std::string& filename,
                                   const std::map<std::string, int>& frequencies) {
     std::ofstream outFile(filename);
-    if (!outFile.is_open()) {
+    if (!outFile) {
+        std::cerr << "Failed to open file for writing: " << filename << std::endl;
         return false;
     }
 
-    // Write each string sequence and frequency to the file
     for (const auto& pair : frequencies) {
         outFile << pair.first << " " << pair.second << '\n';
+        if (!outFile) {
+            std::cerr << "Failed to write data to file: " << filename << std::endl;
+            return false; // Exit if a write error occurs
+        }
     }
 
-    outFile.close();
     return true;
 }
 
 bool FileManager::loadFrequencies(const std::string& filename,
                                   std::map<std::string, int>& frequencies) {
     std::ifstream inFile(filename);
-    if (!inFile.is_open()) {
+    if (!inFile) {
+        std::cerr << "Failed to open file for reading: " << filename << std::endl;
         return false;
     }
 
-    frequencies.clear(); // Clear existing frequencies before loading new ones
+    frequencies.clear();
     std::string line;
     while (std::getline(inFile, line)) {
         std::istringstream iss(line);
         std::string sequence;
         int freq;
 
-        // Extract the sequence (up to the space) and the frequency
-        if (std::getline(iss, sequence, ' ') && (iss >> freq)) {
+        if (!(iss >> sequence >> freq)) {
+            std::cerr << "Invalid data format in file: " << filename << std::endl;
+            // Decide whether to return false or continue processing next lines
+        } else {
             frequencies[sequence] = freq;
         }
     }
 
-    inFile.close();
     return true;
 }

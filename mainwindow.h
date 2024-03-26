@@ -22,7 +22,9 @@ private slots:
     void on_pushButtonRock_clicked();
     void on_pushButtonPaper_clicked();
     void on_pushButtonScissors_clicked();
-    void updateUI(const QString &humanChoice, const QString &computerChoice, const QString &winner);
+    // Inside the MainWindow class declaration
+    void updateUI(const QString &humanChoice, const QString &computerChoice, const QString &computerPrediction, const QString &winner);
+
     void updateRound();
     void updateStats();
     void resetGame();

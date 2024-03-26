@@ -11,6 +11,7 @@ public:
     RandomStrategy();
     char makeChoice() override;
     void updateState(char humanChoice) override;
+    char predictNextMove() override;
 };
 
 #endif // RANDOMSTRATEGY_H

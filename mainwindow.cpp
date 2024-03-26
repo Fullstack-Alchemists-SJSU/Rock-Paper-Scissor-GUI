@@ -31,12 +31,21 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::on_strategyComboBox_currentIndexChanged(int index) {
     // Example: 0 for SmartStrategy, 1 for RandomStrategy
     Strategy* newStrategy = nullptr;
+    bool showPredictions = false;
+
     if (index == 0) {
         newStrategy = new SmartStrategy();
+        showPredictions = true;  // Show predictions for SmartStrategy
     } else {
         newStrategy = new RandomStrategy();
+        showPredictions = false;  // Hide predictions for RandomStrategy
     }
+
     gameEngine->setStrategy(newStrategy);
+
+    // Set visibility of prediction labels based on the selected strategy
+    ui->labelComputerPrediction->setVisible(showPredictions);
+    ui->labelComputerPredictionResult->setVisible(showPredictions);
 }
 
 
@@ -64,6 +73,9 @@ void MainWindow::on_pushButtonScissors_clicked() {
 }
 
 void MainWindow::updateRound() {
+    // Get the computer's prediction before the actual choice is made
+    QString computerPrediction = QString(QChar(gameEngine->getComputerPrediction()));
+
     char result = gameEngine->playNextRound();
 
     QString humanChoice = QString(QChar(gameEngine->getHumanChoice()));
@@ -84,16 +96,21 @@ void MainWindow::updateRound() {
         roundCount++;
     }
 
-    updateUI(humanChoice, computerChoice, winner);
+    // Update the UI with the choices, winner, and the computer's prediction
+    updateUI(humanChoice, computerChoice, computerPrediction, winner);
     updateStats();
 }
 
-void MainWindow::updateUI(const QString &humanChoice, const QString &computerChoice, const QString &winner) {
+
+void MainWindow::updateUI(const QString &humanChoice, const QString &computerChoice, const QString &computerPrediction, const QString &winner) {
     ui->labelHumanChoiceResult->setText(humanChoice);
     ui->labelComputerChoiceResult->setText(computerChoice);
+    // Assuming you have a QLabel for displaying computer's prediction, e.g., labelComputerPredictionResult
+    ui->labelComputerPredictionResult->setText(computerPrediction);
     ui->labelWinnerResult->setText(winner);
     ui->labelRound->setText(QString("Round: %1").arg(roundCount));
 }
+
 
 
 void MainWindow::endOfRound() {
@@ -116,6 +133,9 @@ void MainWindow::updateStats() {
     ui->labelTiesResult->setText(QString::number(gameEngine->getTieScore()));
     ui->labelRound->setText(QString("Round: %1").arg(roundCount));
 }
+
+
+
 
 void MainWindow::resetGame() {
     gameEngine->resetScores();

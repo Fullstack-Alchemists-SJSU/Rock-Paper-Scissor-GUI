@@ -47,9 +47,12 @@ void SmartStrategy::saveFrequencies() {
 }
 
 std::string SmartStrategy::getRecentSequence() {
-    // Convert the last N-1 choices to a string (exclude the very last choice)
-    return std::string(recentChoices.begin(), recentChoices.end() - 1);
+    if (recentChoices.size() < N - 1) {
+        return std::string(recentChoices.begin(), recentChoices.end());
+    }
+    return std::string(recentChoices.end() - (N - 1), recentChoices.end() - 1);
 }
+
 
 char SmartStrategy::predictNextMove() {
     std::string recentSequence = getRecentSequence(); // Get the last N-1 choices as a string

@@ -37,7 +37,7 @@ public:
     char getHumanChoice() const;
     char getComputerChoice() const;
     char getResult() const;
-
+    char getComputerPrediction() const;
     void playRoundOfThree();
 
 
