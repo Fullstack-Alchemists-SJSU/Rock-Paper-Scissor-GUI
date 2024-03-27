@@ -5,6 +5,8 @@
 #include "GameEngine.h"
 #include "SmartStrategy.h"
 
+#include <QMessageBox>
+
 #include <QString> // For QString conversions
 #include <QDebug> // For console debugging (if needed)
 
@@ -23,6 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Connect the strategy combo box signal to the slot
     connect(ui->strategyComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(on_strategyComboBox_currentIndexChanged(int)));
+
+    connect(ui->spinBoxNumberOfRounds, SIGNAL(valueChanged(int)),
+            this, SLOT(on_numberOfRoundsValueChanged(int)));
+
+
+
 
     // Initialize the game engine with a default strategy
     gameEngine->setStrategy(new SmartStrategy());
@@ -48,6 +56,9 @@ void MainWindow::on_strategyComboBox_currentIndexChanged(int index) {
     ui->labelComputerPredictionResult->setVisible(showPredictions);
 }
 
+void MainWindow::on_numberOfRoundsValueChanged(int value) {
+    gameEngine->setTotalRounds(value);
+}
 
 
 MainWindow::~MainWindow() {
@@ -95,6 +106,13 @@ void MainWindow::updateRound() {
         chanceCount = 0;
         roundCount++;
     }
+    if (roundCount >= gameEngine->getTotalRounds()) {
+        endOfRound();
+       // QString finalMessage = (gameEngine->getHumanScore() > gameEngine->getComputerScore()) ? "You won!" : "Game over. You lost.";
+        //QMessageBox::information(this, "Game Over", finalMessage);
+        // Optionally, disable game controls here to prevent further play
+    }
+
 
     // Update the UI with the choices, winner, and the computer's prediction
     updateUI(humanChoice, computerChoice, computerPrediction, winner);
@@ -114,8 +132,16 @@ void MainWindow::updateUI(const QString &humanChoice, const QString &computerCho
 
 
 void MainWindow::endOfRound() {
+    QString finalMessage = (gameEngine->getHumanScore() > gameEngine->getComputerScore()) ? "You won!" : "Game over. You lost.";
+    QMessageBox::information(this, "Game Over... Restarting", finalMessage);
+
+    // Reset the game state
+    gameEngine->resetScores();
     chanceCount = 0;
-    roundCount++;
+    roundCount = 1; // Reset to 1 for the new game
+
+    // Update the UI to reflect the reset
+    updateStats();
     resetGame();
 }
 
@@ -137,9 +163,9 @@ void MainWindow::updateStats() {
 
 
 
+
 void MainWindow::resetGame() {
     gameEngine->resetScores();
     updateStats();
     // Optionally, update other parts of the UI as needed, like resetting choices or messages
 }
-

@@ -30,6 +30,9 @@ private slots:
     void resetGame();
     void endOfRound();
     void on_strategyComboBox_currentIndexChanged(int index);
+    void on_numberOfRoundsValueChanged(int value);
+
+
 
 private:
     Ui::MainWindow *ui;
@@ -39,7 +42,7 @@ private:
     int chanceCount = 0;
     int roundCount = 1;
     const int maxChances = 5;  // Maximum chances per round
-
+    int numberOfRounds;
 };
 
 #endif // MAINWINDOW_H

@@ -20,6 +20,8 @@ private:
     char lastResult;
 
     char playRound();
+    int totalRounds;
+    int roundCount;
 
 public:
     explicit GameEngine(Player* human);
@@ -39,6 +41,8 @@ public:
     char getResult() const;
     char getComputerPrediction() const;
     void playRoundOfThree();
+    void setTotalRounds(int rounds);
+    int getTotalRounds() const;
 
 
 };

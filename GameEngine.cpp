@@ -30,10 +30,17 @@ GameEngine::~GameEngine() {
 int GameEngine::getHumanScore() const {
     return scoreHuman;
 }
+void GameEngine::setTotalRounds(int rounds) {
+    totalRounds = rounds;
+}
 
+int GameEngine::getTotalRounds() const {
+    return totalRounds;
+}
 int GameEngine::getComputerScore() const {
     return scoreComputer;
 }
+
 
 int GameEngine::getTieScore() const {
     return tieScore;
@@ -81,6 +88,13 @@ char GameEngine::playRound() {
         scoreComputer++;
     }
 
+     roundCount++;
+    if (roundCount >= totalRounds) {
+        // Handle the end of the game, e.g., show results, disable inputs, etc.
+        std::cout << "Game Over! Final Scores - Human: " << scoreHuman
+                 << ", Computer: " << scoreComputer
+                 << ", Ties: " << tieScore << std::endl;
+    }
     lastResult = result; // Store the last result for retrieval
     return result;
 }
