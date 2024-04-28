@@ -42,8 +42,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Strategy combo box
     strategyComboBox = new QComboBox(centralWidget);
-    strategyComboBox->addItem("Smart Strategy");
+    strategyComboBox->addItem("Select ");
     strategyComboBox->addItem("Random Strategy");
+    strategyComboBox->addItem("Smart Strategy");
     layout->addWidget(strategyComboBox);
 
     // Line edit for number of rounds
@@ -124,6 +125,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(pushButtonRock, &QPushButton::clicked, this, &MainWindow::on_pushButtonRock_clicked);
     connect(pushButtonPaper, &QPushButton::clicked, this, &MainWindow::on_pushButtonPaper_clicked);
     connect(pushButtonScissors, &QPushButton::clicked, this, &MainWindow::on_pushButtonScissors_clicked);
+
+    // In MainWindow constructor after setting up UI components
+    on_strategyComboBox_currentIndexChanged(strategyComboBox->currentIndex());  // Adjust initial visibility of prediction labels
+
 }
 
 
@@ -150,11 +155,30 @@ void MainWindow::on_pushButtonStart_clicked()
 
 void MainWindow::on_strategyComboBox_currentIndexChanged(int index) {
     int strategyType = index + 1; // Adjust index to match your StrategyFactory mappings
-    Strategy *newStrategy = StrategyFactory::createStrategy(strategyType);
-    gameEngine->setStrategy(newStrategy);
-  //labelComputerPrediction->setVisible(showPredictions);
-  //  labelComputerPredictionResult->setVisible(showPredictions);
-    qDebug() << "\nStrategy changed to:" << strategyComboBox->itemText(index);
+    Strategy *newStrategy = nullptr;
+    bool showPredictions = false;
+    switch (index) {
+    case 0: // "Select Strategy" - possibly do nothing or default to a basic strategy
+        newStrategy = StrategyFactory::createStrategy(0); // Adjust this according to your factory implementation
+        showPredictions = false;
+        break;
+    case 1: // "Random Strategy"
+        newStrategy = StrategyFactory::createStrategy(1);
+        showPredictions = false;
+        break;
+    case 2: // "Smart Strategy"
+        newStrategy = StrategyFactory::createStrategy(2);
+        showPredictions = true;
+        break;
+    }
+
+    if (newStrategy != nullptr) {
+        gameEngine->setStrategy(newStrategy);
+        qDebug() << "Strategy changed to:" << strategyComboBox->itemText(index);
+    }
+    labelComputerPrediction->setVisible(showPredictions);
+    labelComputerPredictionResult->setVisible(showPredictions);
+
     QString strategy = strategyComboBox->itemText(index);
    // qDebug() << "Strategy changed to:" << strategy;
 }
@@ -218,19 +242,11 @@ void MainWindow::updateRound() {
     //qDebug() << "\nPerson: " << humanChoice << " vs Computer: " << computerChoice;
     qDebug() << "\nWinner: " << winner;
 
-    // Increment the round count after each set of chances or a single play
-   /* if (++chanceCount >= maxChances) {
-        chanceCount = 0;
-        roundCount++;
-    }*/
     roundCount++;
+    updateUI(humanChoice, computerChoice, computerPrediction, winner);
+    updateStats();
     if (roundCount > gameEngine->getTotalRounds()) {
         endOfRound();
-    } else {
-        //Not predicting for now
-
-        updateUI(humanChoice, computerChoice, computerPrediction, winner);
-        updateStats();
     }
 
     qDebug() << "\nupdateRound() called - End";
@@ -279,5 +295,6 @@ void MainWindow::resetGame() {
     qDebug() << "resetGame() called ";
     gameEngine->resetScores();
     updateStats();
+
     // Optionally, update other parts of the UI as needed, like resetting choices or messages
 }

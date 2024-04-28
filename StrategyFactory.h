@@ -13,7 +13,7 @@ public:
         case 2:
             return new SmartStrategy();
         default:
-            return nullptr;
+            return new RandomStrategy();
         }
     }
 };
