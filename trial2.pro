@@ -16,6 +16,7 @@ SOURCES += \
         # Add other source files here
 
 HEADERS += \
+        StrategyFactory.h \
         mainwindow.h \
         GameEngine.h \
         HumanPlayer.h \

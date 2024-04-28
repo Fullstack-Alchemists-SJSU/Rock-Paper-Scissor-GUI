@@ -19,9 +19,9 @@ private:
     char computerChoice;
     char lastResult;
 
-    char playRound();
+
+    int roundCount; // Make sure this is declared in the class definition
     int totalRounds;
-    int roundCount;
 
 public:
     explicit GameEngine(Player* human);
@@ -30,6 +30,7 @@ public:
     void setStrategy(Strategy* strategy);
     void humanPlayerMakesChoice(char choice);
     char playNextRound();
+    char playRound();
     void playGame();
     void resetScores();
 

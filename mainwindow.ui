@@ -7,176 +7,25 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Rock Paper Scissors</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayoutMain">
-   <item>
-    <widget class="QComboBox" name="strategyComboBox">
-     <item>
-      <property name="text">
-       <string>Smart Strategy</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Random Strategy</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
-     <widget class="QSpinBox" name="spinBoxNumberOfRounds">
-       <property name="minimum">
-         <number>1</number>
-       </property>
-       <property name="maximum">
-         <number>10</number>
-       </property>
-       <property name="value">
-         <number>1</number>
-       </property>
-     </widget>
-   </item>
 
-    <item>
-     <widget class="QLabel" name="labelRound">
-      <property name="text">
-       <string>Round: 1</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBoxChoices">
-      <layout class="QHBoxLayout" name="horizontalLayoutChoices">
-       <item>
-        <widget class="QPushButton" name="pushButtonRock">
-         <property name="text">
-          <string>Rock</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonPaper">
-         <property name="text">
-          <string>Paper</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonScissors">
-         <property name="text">
-          <string>Scissors</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBoxResults">
-      <layout class="QFormLayout" name="formLayoutResults">
-       <item row="0" column="0">
-        <widget class="QLabel" name="labelHumanChoice">
-         <property name="text">
-          <string>Human chooses:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="labelHumanChoiceResult"/>
-        </item>
-        <item row="1" column="0">
-        <widget class="QLabel" name="labelComputerChoice">
-        <property name="text">
-        <string>Computer chooses:</string>
-        </property>
-        </widget>
-        </item>
-        <item row="1" column="1">
-        <widget class="QLabel" name="labelComputerChoiceResult"/>
-        </item>
-        <item row="2" column="0">
-        <widget class="QLabel" name="labelWinner">
-        <property name="text">
-        <string>The winner:</string>
-        </property>
-        </widget>
-        </item>
-        <item row="2" column="1">
-        <widget class="QLabel" name="labelWinnerResult"/>
-        </item>
-        </layout>
-        </widget>
-        </item>
-        <item row="3" column="0">
-            <widget class="QLabel" name="labelComputerPrediction">
-                <property name="text">
-                    <string>Computer predicts:</string>
-                </property>
-            </widget>
-        </item>
-        <item row="3" column="1">
-            <widget class="QLabel" name="labelComputerPredictionResult"/>
-        </item>
-
-        <item>
-        <widget class="QGroupBox" name="groupBoxStatistics">
-        <layout class="QFormLayout" name="formLayoutStatistics">
-        <item row="0" column="0">
-        <widget class="QLabel" name="labelHumanWins">
-        <property name="text">
-        <string>Human wins:</string>
-        </property>
-        </widget>
-        </item>
-        <item row="0" column="1">
-        <widget class="QLabel" name="labelHumanWinsResult"/>
-        </item>
-        <item row="1" column="0">
-        <widget class="QLabel" name="labelComputerWins">
-        <property name="text">
-        <string>Computer wins:</string>
-        </property>
-        </widget>
-        </item>
-        <item row="1" column="1">
-        <widget class="QLabel" name="labelComputerWinsResult"/>
-        </item>
-        <item row="2" column="0">
-        <widget class="QLabel" name="labelTies">
-        <property name="text">
-        <string>Ties:</string>
-        </property>
-        </widget>
-        </item>
-        <item row="2" column="1">
-        <widget class="QLabel" name="labelTiesResult"/>
-        </item>
-        </layout>
-        </widget>
-        </item>
-        </layout>
-        </widget>
-        <widget class="QMenuBar" name="menubar">
-        <property name="geometry">
-        <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>400</width>
-        <height>22</height>
-        </rect>
-        </property>
-        </widget>
-        <widget class="QStatusBar" name="statusbar"/>
-        </widget>
-        <resources/>
-        <connections/>
-        </ui>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

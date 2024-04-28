@@ -1,48 +1,70 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
-#include <QMainWindow>
 #include "GameEngine.h"
-#include "HumanPlayer.h"
-#include "ComputerPlayer.h"
+#include <QMainWindow>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QGroupBox>
+#include <QPushButton>
+#include <QLabel>
+#include <QDebug>
+#include <QVBoxLayout>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+namespace Ui {
+class MainWindow;
+}
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
+    void on_pushButtonStart_clicked();  // Slot for the start button
+    void on_strategyComboBox_currentIndexChanged(int index);  // Slot for combo box changes
     void on_pushButtonRock_clicked();
     void on_pushButtonPaper_clicked();
     void on_pushButtonScissors_clicked();
-    // Inside the MainWindow class declaration
     void updateUI(const QString &humanChoice, const QString &computerChoice, const QString &computerPrediction, const QString &winner);
-
     void updateRound();
     void updateStats();
     void resetGame();
     void endOfRound();
-    void on_strategyComboBox_currentIndexChanged(int index);
-    void on_numberOfRoundsValueChanged(int value);
-
-
 
 private:
     Ui::MainWindow *ui;
     GameEngine *gameEngine;
-    HumanPlayer *humanPlayer;
-    ComputerPlayer *computerPlayer;
-    int chanceCount = 0;
-    int roundCount = 1;
-    const int maxChances = 5;  // Maximum chances per round
-    int numberOfRounds;
+    QLineEdit *lineEditNumberOfRounds;
+    QPushButton *pushButtonStart;
+    QComboBox *strategyComboBox;
+    QLabel *labelRound;  // Declare the round label
+    QGroupBox *groupBoxChoices;
+    QPushButton *pushButtonRock;
+    QPushButton *pushButtonPaper;
+    QPushButton *pushButtonScissors;
+    QGroupBox *groupBoxResults;
+    QLabel *labelHumanChoice;
+    QLabel *labelHumanChoiceResult;
+    QLabel *labelComputerChoice;
+    QLabel *labelComputerChoiceResult;
+    QLabel *labelWinner;
+    QLabel *labelWinnerResult;
+    QLabel *labelComputerPrediction;
+    QLabel *labelComputerPredictionResult;
+
+    QGroupBox *groupBoxStatistics;
+    QLabel *labelHumanWins;
+    QLabel *labelHumanWinsResult;
+    QLabel *labelComputerWins;
+    QLabel *labelComputerWinsResult;
+    QLabel *labelTies;
+    QLabel *labelTiesResult;
+    int roundCount;
+
+    void setupChoiceButtons(QVBoxLayout *layout);  // Add this line
+
 };
 
 #endif // MAINWINDOW_H

@@ -4,10 +4,12 @@
 
 RandomStrategy::RandomStrategy() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
 }
 
 char RandomStrategy::makeChoice() {
     int randomNum = std::rand() % 3;
+
     switch (randomNum) {
         case 0:
             return 'R'; // Rock
